@@ -17,15 +17,15 @@ const FileOps = () => {
     },
   ]
 
-  return fileOps.map((item, index) => (
-    <button
-      key={item.name}
-      className="hover:bg-purple-600 bg-purple-400 px-2 "
-      onClick={item.action}
-    >
-      {item.name}
-    </button>
-  ))
+  return (
+    <div className="flex flex-row">
+      {fileOps.map((item, index) => (
+        <button key={item.name} className="hover:bg-purple-600 bg-purple-400 px-2 " onClick={item.action}>
+          {item.name}
+        </button>
+      ))}
+    </div>
+  )
 }
 
 export default FileOps
