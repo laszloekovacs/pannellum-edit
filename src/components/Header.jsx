@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import FileSave from "./FileSave"
+import FileOps from "./FileOps"
 
 const Header = () => {
   const modes = ["edit", "panorama"]
@@ -26,8 +26,7 @@ const Header = () => {
 
   return (
     <div className="bg-slate-400 flex flex-row">
-      <FileSave />
-
+      <FileOps />
       <form className="px-2 py-2" onChange={handleChange}>
         {radioButtons}
       </form>
