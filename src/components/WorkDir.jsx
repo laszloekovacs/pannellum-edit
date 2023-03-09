@@ -1,18 +1,35 @@
 import React, { useState, createContext } from "react"
 
-export const workingDirectoryContext = createContext({ directory: null })
+export const workingDirectoryContext = createContext({
+  directory: null,
+  assets: null,
+})
 
-const WorkDir = () => {
+const WorkDir = ({ children }) => {
   const [workDirectory, setWorkDirectory] = useState(null)
+  const [assetsDirectory, setAssetsDirectory] = useState(null)
+  const [panoramaDirectory, setPanoramaDirectory] = useState(null)
 
   const handleClick = async (event) => {
     try {
+      // store the root project folder
       const dirhandle = await window.showDirectoryPicker({
         mode: "readwrite",
         startIn: "desktop",
       })
-
       setWorkDirectory(dirhandle)
+
+      // return or create the assets folder
+      const assets = await dirhandle.getDirectoryHandle("assets", {
+        create: true,
+      })
+      setAssetsDirectory(assets)
+
+      // return or create the panoramas folder
+      const panorama = await dirhandle.getDirectoryHandle("panoramas", {
+        create: true,
+      })
+      setPanoramaDirectory(panorama)
     } catch (error) {
       console.log(error)
     }
@@ -22,14 +39,20 @@ const WorkDir = () => {
     <div>
       {workDirectory == null ? (
         <input
-          className="border-solid border-2 border-indigo-500 px-2 py-1"
+          className="px-2 py-1 bg-green-400"
           type="button"
           value="Set working directory"
           onClick={handleClick}
         />
       ) : (
-        <workingDirectoryContext.Provider value={workDirectory}>
-          <p>Working directory selected</p>
+        <workingDirectoryContext.Provider
+          value={{
+            directory: workDirectory,
+            assets: assetsDirectory,
+            panorama: panoramaDirectory,
+          }}
+        >
+          {children}
         </workingDirectoryContext.Provider>
       )}
     </div>
