@@ -6,7 +6,7 @@ const Header = () => {
 
   const [selectedMode, setSelectedMode] = useState(modes[0])
 
-  const handleChange = (event) => {
+  const handleModeChange = (event) => {
     setSelectedMode(event.target.value)
   }
 
@@ -27,7 +27,7 @@ const Header = () => {
   return (
     <div className="bg-slate-400 flex flex-row">
       <FileOps />
-      <form className="px-2 py-2" onChange={handleChange}>
+      <form className="px-2 py-2" onChange={handleModeChange}>
         {radioButtons}
       </form>
     </div>
