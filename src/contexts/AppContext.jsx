@@ -1,9 +1,13 @@
 import React, { useState, createContext, SyntheticEvent } from "react"
 
-export const appContext = createContext({ projectRoot: null })
+export const appContext = createContext({
+  root: null,
+  panoramas: null,
+})
 
 const AppContextProvider = ({ children }) => {
-  const [projectRoot, setProjectRoot] = useState(null)
+  const [rootFolder, setRootFolder] = useState(null)
+  const [panoramasFolder, setPanoramasFolder] = useState(null)
 
   const handleClick = async (event) => {
     try {
@@ -12,20 +16,26 @@ const AppContextProvider = ({ children }) => {
         mode: "readwrite",
         startIn: "desktop",
       })
-      setProjectRoot(root)
+      setRootFolder(root)
+
+      const panoramas = await root.getDirectoryHandle("panoramas", {
+        create: false,
+      })
+      setPanoramasFolder(panoramas)
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
   return (
     <div>
-      {projectRoot == null ? (
+      {rootFolder == null ? (
         <input type="button" value="Set working directory" onClick={handleClick} />
       ) : (
         <appContext.Provider
           value={{
-            projectRoot: projectRoot,
+            root: rootFolder,
+            panoramas: panoramasFolder,
           }}
         >
           {children}

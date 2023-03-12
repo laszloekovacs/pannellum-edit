@@ -7,7 +7,7 @@ import { appContext } from "../contexts/AppContext"
 import PanoramaListItem from "./PanoramaListItem"
 
 const PanoramaList = () => {
-  const projectRoot = useContext(appContext).projectRoot
+  const dir = useContext(appContext).panoramas
 
   const [files, setFiles] = useState([])
 
@@ -15,11 +15,6 @@ const PanoramaList = () => {
     ;(async () => {
       try {
         let filelist = []
-
-        // get directory handle for panoramas folder
-        const dir = await projectRoot.getDirectoryHandle("panoramas", {
-          create: false,
-        })
 
         // list all filenames in panoramas folder
         for await (const entry of dir.values()) {

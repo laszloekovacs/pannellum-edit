@@ -1,18 +1,16 @@
-import React from "react"
+import React, { useContext } from "react"
 import { useSelector } from "react-redux"
 import PanellumView from "./PanellumView"
 
-/*
-    scene converter for pannellum
-    before rendering we need to convert file paths to urls
-*/
+import { appContext } from "../contexts/AppContext"
 
 const PannellumWrapper = () => {
   const project = useSelector((state) => state.project)
+  const panoramaFolder = useContext(appContext).panoramas
 
   return (
     <>
-      <PanellumView scene={builtScene} />
+      <PanellumView scene={project} />
     </>
   )
 }
