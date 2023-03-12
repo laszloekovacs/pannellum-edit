@@ -8,14 +8,14 @@ import PreviewLayout from "./PreviewLayout"
 
 /* returns the selected editor "tab" */
 function Layout() {
-  const activeLayout = useSelector((state) => state.editor.activeLayout)
+  const editor = useSelector((state) => state.editor)
 
-  switch (activeLayout) {
-    case "edit":
+  switch (editor.activeLayout) {
+    case editor.layouts[0]:
       return <EditLayout />
-    case "panorama":
+    case editor.layouts[1]:
       return <PanoramaLayout />
-    case "preview":
+    case editor.layouts[2]:
       return <PreviewLayout />
     default:
       return <EditLayout />

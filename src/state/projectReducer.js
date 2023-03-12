@@ -24,16 +24,17 @@ export const projectReducer = createSlice({
     // add new scene panorama and set inital state
     // do not add a scene if it already exists
     createScene: (state, action) => {
-      if (!Object.hasOwn(state.scenes, action.payload.title)) {
-        // new scene structure
+      const { title } = action.payload
+
+      if (!Object.hasOwn(state.scenes, title)) {
         const scene = {
-          title: trimFileExtension(action.payload.title),
-          panorama: action.payload.title,
+          title: title,
+          panorama: title,
           northOffset: 0,
           hotSpots: [],
         }
 
-        state.scenes[action.payload.title] = scene
+        state.scenes[title] = scene
       }
     },
   },

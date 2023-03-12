@@ -1,5 +1,6 @@
 import React from "react"
 import SceneList from "../components/SceneList"
+import SceneProperties from "../components/SceneProperties"
 
 const EditLayout = () => {
   return (
@@ -9,6 +10,7 @@ const EditLayout = () => {
       </main>
       <aside>
         <SceneList />
+        <SceneProperties />
       </aside>
     </>
   )
