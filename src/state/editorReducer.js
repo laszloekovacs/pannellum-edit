@@ -5,7 +5,7 @@ const layouts = ["editor", "panoramas", "preview"]
 const initialState = {
   layouts: layouts,
   activeLayout: layouts[0],
-  activeScene: 0,
+  activeScene: "",
 }
 
 export const editorSlice = createSlice({

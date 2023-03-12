@@ -1,4 +1,5 @@
 import React from "react"
+import HotspotList from "../components/HotspotList"
 import SceneList from "../components/SceneList"
 import SceneProperties from "../components/SceneProperties"
 
@@ -11,6 +12,7 @@ const EditLayout = () => {
       <aside>
         <SceneList />
         <SceneProperties />
+        <HotspotList />
       </aside>
     </>
   )
