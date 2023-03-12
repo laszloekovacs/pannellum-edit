@@ -34,13 +34,11 @@ const PanoramaList = () => {
             }
 
             filelist.push(item)
-            console.log(item)
           }
         }
 
         setFiles(filelist)
       } catch (error) {
-        console.log(error)
         setFiles([])
       }
     })()

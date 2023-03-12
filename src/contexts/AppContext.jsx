@@ -12,7 +12,6 @@ const AppContextProvider = ({ children }) => {
         mode: "readwrite",
         startIn: "desktop",
       })
-      console.log(root)
       setProjectRoot(root)
     } catch (error) {
       console.log(error)

@@ -26,7 +26,6 @@ const FileOperations = () => {
     const project = await file.getFile()
 
     dispatch(loadScene(project))
-    console.log("file loaded")
   }
 
   // save scene to file system
