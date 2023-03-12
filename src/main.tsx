@@ -3,7 +3,7 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 
 //styling
-import "./index.css"
+import "./index.scss"
 
 // redux
 import { store } from "./state/store"

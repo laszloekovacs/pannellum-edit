@@ -23,7 +23,7 @@ function App() {
   )
 
   return (
-    <div className="bg-slate-200 h-screen p-2">
+    <div>
       <Header modes={ViewSelectElement} />
 
       <main>{viewMode == "edit" ? <p>view</p> : <p>panorama</p>}</main>

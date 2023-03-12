@@ -18,9 +18,9 @@ const FileOperations = () => {
   ]
 
   return (
-    <div className="flex flex-row">
+    <div>
       {fileOps.map((item) => (
-        <button key={item.name} className="hover:bg-purple-600 bg-purple-400 px-2 " onClick={item.action}>
+        <button key={item.name} onClick={item.action}>
           {item.name}
         </button>
       ))}

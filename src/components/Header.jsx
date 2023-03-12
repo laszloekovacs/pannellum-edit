@@ -3,7 +3,7 @@ import FileOperations from "./FileOperations"
 
 const Header = ({ modes }) => {
   return (
-    <div className="flex flex-row">
+    <div>
       <FileOperations />
       {modes}
     </div>

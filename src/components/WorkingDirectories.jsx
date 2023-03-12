@@ -38,7 +38,7 @@ const WorkingDirectories = ({ children }) => {
   return (
     <div>
       {workDirectory == null ? (
-        <input className="px-2 py-1 bg-green-400" type="button" value="Set working directory" onClick={handleClick} />
+        <input type="button" value="Set working directory" onClick={handleClick} />
       ) : (
         <workingDirectoryContext.Provider
           value={{
