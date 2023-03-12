@@ -8,7 +8,7 @@ export const projectReducer = createSlice({
   reducers: {
     // load scene from project file
     loadScene: (state, action) => {
-      state = action.payload
+      return action.payload
     },
 
     // reset the project delete all scenes and set default

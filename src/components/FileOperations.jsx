@@ -1,9 +1,10 @@
 import React from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { loadScene, resetProject } from "../state/projectReducer"
 
 const FileOperations = () => {
   const dispatch = useDispatch()
+  const project = useSelector((state) => state.project)
 
   // load scene from file system
   const handleLoadScene = async () => {
@@ -23,9 +24,13 @@ const FileOperations = () => {
     // show file picker
     const [file] = await window.showOpenFilePicker(opts)
 
-    const project = await file.getFile()
+    const data = await file.getFile()
+    const text = await data.text()
 
-    dispatch(loadScene(project))
+    console.log(JSON.parse(text))
+
+    dispatch(loadScene(JSON.parse(text)))
+    console.log("scene loaded")
   }
 
   // save scene to file system
@@ -43,7 +48,7 @@ const FileOperations = () => {
       // pick a save file
       const writable = await (await window.showSaveFilePicker(opts)).createWritable()
 
-      const content = JSON.stringify(store.getState(), null, 2)
+      const content = JSON.stringify(project, null, 2)
       await writable.write(content)
       console.log("writing")
       await writable.close()
