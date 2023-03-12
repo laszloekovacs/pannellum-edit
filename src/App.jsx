@@ -8,7 +8,7 @@ import { Provider } from "react-redux"
 import Header from "./components/Header"
 import WorkingDirectories from "./components/WorkingDirectories"
 
-/* Layouts */
+/* Layouts for different tabs */
 import EditLayout from "./Layouts/EditLayout"
 import PanoramaLayout from "./Layouts/PanoramaLayout"
 

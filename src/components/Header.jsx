@@ -3,10 +3,10 @@ import FileOperations from "./FileOperations"
 
 const Header = ({ modes }) => {
   return (
-    <div>
+    <nav>
       <FileOperations />
       {modes}
-    </div>
+    </nav>
   )
 }
 
