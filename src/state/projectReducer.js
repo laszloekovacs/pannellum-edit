@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { trimFileExtension } from "../helpers"
-import initialState from "./initialState"
+import initialProjectState from "./initialProjectState"
 
 export const projectReducer = createSlice({
-  name: "config",
-  initialState,
+  name: "project",
+  initialState: initialProjectState,
   reducers: {
     // load scene from project file
     loadScene: (state, action) => {
@@ -13,7 +13,7 @@ export const projectReducer = createSlice({
 
     // reset the project delete all scenes and set default
     resetProject: (state) => {
-      state = initialState
+      state = initialProjectState
     },
 
     // set first scene for the player

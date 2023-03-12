@@ -1,4 +1,4 @@
-const initialState = {
+const initialProjectState = {
   default: {
     firstScene: "",
     sceneFadeDuration: 1000,
@@ -16,7 +16,6 @@ const initialState = {
   },
   scenes: {},
   articles: [],
-  editor: {},
 }
 
-export default initialState
+export default initialProjectState
