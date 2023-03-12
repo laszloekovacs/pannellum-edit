@@ -5,7 +5,7 @@ export const workingDirectoryContext = createContext({
   assets: null,
 })
 
-const WorkDir = ({ children }) => {
+const WorkingDirectories = ({ children }) => {
   const [workDirectory, setWorkDirectory] = useState(null)
   const [assetsDirectory, setAssetsDirectory] = useState(null)
   const [panoramaDirectory, setPanoramaDirectory] = useState(null)
@@ -38,12 +38,7 @@ const WorkDir = ({ children }) => {
   return (
     <div>
       {workDirectory == null ? (
-        <input
-          className="px-2 py-1 bg-green-400"
-          type="button"
-          value="Set working directory"
-          onClick={handleClick}
-        />
+        <input className="px-2 py-1 bg-green-400" type="button" value="Set working directory" onClick={handleClick} />
       ) : (
         <workingDirectoryContext.Provider
           value={{
@@ -59,4 +54,4 @@ const WorkDir = ({ children }) => {
   )
 }
 
-export default WorkDir
+export default WorkingDirectories

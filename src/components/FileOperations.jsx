@@ -2,7 +2,7 @@ import React from "react"
 import { handleLoadScene, handleSaveScene } from "../actions/fileoperations"
 import { useDispatch } from "react-redux"
 
-const FileOps = () => {
+const FileOperations = () => {
   const dispatch = useDispatch()
 
   const fileOps = [
@@ -28,4 +28,4 @@ const FileOps = () => {
   )
 }
 
-export default FileOps
+export default FileOperations

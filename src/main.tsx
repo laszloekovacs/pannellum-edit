@@ -11,14 +11,14 @@ import { Provider } from "react-redux"
 
 // components
 import App from "./App"
-import WorkDir from "./components/WorkDir"
+import WorkingDirectories from "./components/WorkingDirectories"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
-      <WorkDir>
+      <WorkingDirectories>
         <App />
-      </WorkDir>
+      </WorkingDirectories>
     </Provider>
   </React.StrictMode>
 )
