@@ -6,9 +6,7 @@ import SceneProperties from "../components/SceneProperties"
 const EditLayout = () => {
   return (
     <>
-      <main>
-        <p>main</p>
-      </main>
+      <main></main>
       <aside>
         <SceneList />
         <SceneProperties />

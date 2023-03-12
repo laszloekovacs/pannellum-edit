@@ -10,6 +10,7 @@ import AppContextProvider from "./contexts/AppContext"
 /* layout */
 import Layout from "./Layouts/Layout"
 import Header from "./Layouts/Header"
+import PreviewCacheProvider from "./contexts/PreviewCacheContext"
 
 /*
   Root of the app, privides redux store and context providers.
@@ -21,10 +22,12 @@ function App() {
     <React.StrictMode>
       <Provider store={store}>
         <AppContextProvider>
-          <>
-            <Header />
-            <Layout />
-          </>
+          <PreviewCacheProvider>
+            <>
+              <Header />
+              <Layout />
+            </>
+          </PreviewCacheProvider>
         </AppContextProvider>
       </Provider>
     </React.StrictMode>
