@@ -3,11 +3,14 @@ import AddPanorama from "../components/AddPanorama"
 
 const EditLayout = () => {
   return (
-    <main>
+    <>
+      <main>
+        <p>main</p>
+      </main>
       <aside>
         <AddPanorama />
       </aside>
-    </main>
+    </>
   )
 }
 
