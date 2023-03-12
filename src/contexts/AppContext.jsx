@@ -1,41 +1,19 @@
-import React, { useState, createContext } from "react"
+import React, { useState, createContext, SyntheticEvent } from "react"
 
-export const appContext = createContext({
-  rootdir: null,
-  assets: null,
-  panorama: null,
-})
+export const appContext = createContext({ projectRoot: null })
 
 const AppContextProvider = ({ children }) => {
-  const [workDirectory, setWorkDirectory] = useState(null)
-  const [assetsDirectory, setAssetsDirectory] = useState(null)
-  const [panoramaDirectory, setPanoramaDirectory] = useState(null)
+  const [projectRoot, setProjectRoot] = useState(null)
 
   const handleClick = async (event) => {
     try {
       // store the root project folder
-      const dirhandle = await window.showDirectoryPicker({
+      const root = await window.showDirectoryPicker({
         mode: "readwrite",
         startIn: "desktop",
       })
-      setWorkDirectory(dirhandle)
-
-      // return or create the assets folder
-      const assets = await dirhandle.getDirectoryHandle("assets", {
-        create: true,
-      })
-      setAssetsDirectory(assets)
-
-      // return or create the panoramas folder
-      const panorama = await dirhandle.getDirectoryHandle("panoramas", {
-        create: true,
-      })
-      setPanoramaDirectory(panorama)
-
-      // remove these later on
-      console.log(dirhandle)
-      console.log(assets)
-      console.log(panorama)
+      console.log(root)
+      setProjectRoot(root)
     } catch (error) {
       console.log(error)
     }
@@ -43,14 +21,12 @@ const AppContextProvider = ({ children }) => {
 
   return (
     <div>
-      {workDirectory == null ? (
+      {projectRoot == null ? (
         <input type="button" value="Set working directory" onClick={handleClick} />
       ) : (
         <appContext.Provider
           value={{
-            rootdir: workDirectory,
-            assets: assetsDirectory,
-            panorama: panoramaDirectory,
+            projectRoot: projectRoot,
           }}
         >
           {children}
