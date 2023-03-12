@@ -5,7 +5,7 @@ export const workingDirectoryContext = createContext({
   assets: null,
 })
 
-const WorkingDirectories = ({ children }) => {
+const WorkingDirectoriesProvider = ({ children }) => {
   const [workDirectory, setWorkDirectory] = useState(null)
   const [assetsDirectory, setAssetsDirectory] = useState(null)
   const [panoramaDirectory, setPanoramaDirectory] = useState(null)
@@ -54,4 +54,4 @@ const WorkingDirectories = ({ children }) => {
   )
 }
 
-export default WorkingDirectories
+export default WorkingDirectoriesProvider

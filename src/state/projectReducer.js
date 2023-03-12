@@ -1,49 +1,39 @@
 import { createSlice } from "@reduxjs/toolkit"
-
-const initialState = {
-  default: {
-    firstScene: "",
-    sceneFadeDuration: 1000,
-    type: "equirectangular",
-    autoLoad: true,
-    compass: true,
-    hotSpotDebug: true,
-    hfow: 110,
-    vfow: 110,
-    minPitch: -98,
-    maxPitch: 98,
-    basePath: "panorama",
-    imagePath: "images",
-    assetsPath: "assets",
-  },
-  scenes: {},
-  articles: [],
-  editor: {},
-}
+import { trimFileExtension } from "../helpers"
+import initialState from "./initialState"
 
 export const projectReducer = createSlice({
   name: "config",
   initialState,
   reducers: {
-    // load scene
+    // load scene from project file
     loadScene: (state, action) => {
       state = action.payload
     },
 
-    // reset scene
-    reset: (state) => {
+    // reset the project delete all scenes and set default
+    resetProject: (state) => {
       state = initialState
     },
 
-    // set first scene
+    // set first scene for the player
     firstScene: (state, action) => {
       state.default.firstScene = action.payload
     },
 
-    // add new scene panorama
-    addScene: (state, action) => {
-      if (!state.scenes.hasOwn(action.payload.title)) {
-        state.scenes[action.payload.title] = action.payload
+    // add new scene panorama and set inital state
+    // do not add a scene if it already exists
+    createScene: (state, action) => {
+      if (!Object.hasOwn(state.scenes, action.payload.title)) {
+        // new scene structure
+        const scene = {
+          title: trimFileExtension(action.payload.title),
+          panorma: action.payload.title,
+          northOffset: 0,
+          hotSpots: [],
+        }
+
+        state.scenes[action.payload.title] = scene
       }
     },
   },
@@ -51,4 +41,4 @@ export const projectReducer = createSlice({
 
 export default projectReducer.reducer
 
-export const { firstScene, addScene, loadScene } = projectReducer.actions
+export const { loadScene, resetProject, firstScene, createScene } = projectReducer.actions

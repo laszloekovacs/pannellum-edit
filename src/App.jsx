@@ -5,8 +5,8 @@ import { store } from "./state/store"
 import { Provider } from "react-redux"
 
 /* Components */
-import Header from "./components/Header"
-import WorkingDirectories from "./components/WorkingDirectories"
+import Header from "./Layouts/Header"
+import WorkingDirectoriesProvider from "./contexts/WorkingDirectories"
 
 /* Layouts for different tabs */
 import EditLayout from "./Layouts/EditLayout"
@@ -36,12 +36,12 @@ function App() {
   return (
     <React.StrictMode>
       <Provider store={store}>
-        <WorkingDirectories>
+        <WorkingDirectoriesProvider>
           <>
             <Header modes={ViewSelectElement} />
             {viewMode == "edit" ? <EditLayout /> : <PanoramaLayout />}
           </>
-        </WorkingDirectories>
+        </WorkingDirectoriesProvider>
       </Provider>
     </React.StrictMode>
   )

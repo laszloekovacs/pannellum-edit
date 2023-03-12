@@ -1,12 +1,11 @@
 import React from "react"
 import { useDispatch } from "react-redux"
+import { loadScene, resetProject } from "../state/projectReducer"
 
 const FileOperations = () => {
   const dispatch = useDispatch()
 
-  //
-  // load scene
-  //
+  // load scene from file system
   const handleLoadScene = async () => {
     const opts = {
       types: [
@@ -26,13 +25,11 @@ const FileOperations = () => {
 
     const project = await file.getFile()
 
-    loadScene(project)
+    dispatch(loadScene(project))
     console.log("file loaded")
   }
 
-  //
-  // save the repo to the file system
-  //
+  // save scene to file system
   const handleSaveScene = async (event) => {
     const opts = {
       types: [
@@ -63,7 +60,7 @@ const FileOperations = () => {
     {
       name: "reset",
       action: () => {
-        dispatch({ type: "reset" })
+        dispatch(resetProject())
         console.log("scene reset")
       },
     },
