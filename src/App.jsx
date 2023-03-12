@@ -1,5 +1,16 @@
-import Header from "./components/Header"
 import React, { useState } from "react"
+
+// redux
+import { store } from "./state/store"
+import { Provider } from "react-redux"
+
+/* Components */
+import Header from "./components/Header"
+import WorkingDirectories from "./components/WorkingDirectories"
+
+/* Layouts */
+import EditLayout from "./Layouts/EditLayout"
+import PanoramaLayout from "./Layouts/PanoramaLayout"
 
 /* View modes, or view tabs */
 const modes = ["edit", "panorama"]
@@ -23,11 +34,16 @@ function App() {
   )
 
   return (
-    <div>
-      <Header modes={ViewSelectElement} />
-
-      <main>{viewMode == "edit" ? <p>view</p> : <p>panorama</p>}</main>
-    </div>
+    <React.StrictMode>
+      <Provider store={store}>
+        <WorkingDirectories>
+          <>
+            <Header modes={ViewSelectElement} />
+            {viewMode == "edit" ? <EditLayout /> : <PanoramaLayout />}
+          </>
+        </WorkingDirectories>
+      </Provider>
+    </React.StrictMode>
   )
 }
 
