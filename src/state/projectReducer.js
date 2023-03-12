@@ -13,7 +13,7 @@ export const projectReducer = createSlice({
 
     // reset the project delete all scenes and set default
     resetProject: (state) => {
-      state = initialProjectState
+      return initialProjectState
     },
 
     // set first scene for the player
