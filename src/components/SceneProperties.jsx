@@ -6,7 +6,7 @@ const SceneProperties = () => {
   const scenes = useSelector((state) => state.project.scenes)
 
   const selected = scenes[activeScene] || null
-  console.log(scenes)
+
   /* don't show if nothing is selected */
   if (selected == null) return null
 

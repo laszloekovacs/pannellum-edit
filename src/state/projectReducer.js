@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { trimFileExtension } from "../helpers"
 import initialProjectState from "./initialProjectState"
+import produce from "immer"
 
 export const projectReducer = createSlice({
   name: "project",
@@ -17,8 +18,10 @@ export const projectReducer = createSlice({
     },
 
     // set first scene for the player
-    firstScene: (state, action) => {
-      state.default.firstScene = action.payload
+    setFirstScene: (state, action) => {
+      return produce(state, (draft) => {
+        draft.default.firstScene = action.payload
+      })
     },
 
     // add new scene panorama and set inital state
@@ -42,4 +45,4 @@ export const projectReducer = createSlice({
 
 export default projectReducer.reducer
 
-export const { loadScene, resetProject, firstScene, createScene } = projectReducer.actions
+export const { loadScene, resetProject, setFirstScene, createScene } = projectReducer.actions
