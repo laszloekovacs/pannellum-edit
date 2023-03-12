@@ -1,5 +1,4 @@
 import React from "react"
-import AddPanorama from "../components/AddPanorama"
 
 const EditLayout = () => {
   return (
@@ -8,7 +7,7 @@ const EditLayout = () => {
         <p>main</p>
       </main>
       <aside>
-        <AddPanorama />
+        <p>side</p>
       </aside>
     </>
   )

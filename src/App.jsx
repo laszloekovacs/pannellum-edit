@@ -1,24 +1,31 @@
 import React from "react"
 
-// redux
+/* redux */
 import { store } from "./state/store"
 import { Provider } from "react-redux"
 
-/* Components */
-import WorkingDirectoriesProvider from "./contexts/WorkingDirectories"
+/* context providers */
+import AppContextProvider from "./contexts/AppContext"
 
 /* layout */
 import Layout from "./Layouts/Layout"
 import Header from "./Layouts/Header"
 
+/*
+  Root of the app, privides redux store and context providers.
+  file handles are provided trough the context due to them having methods and 
+  redux can't store them 
+  */
 function App() {
   return (
     <React.StrictMode>
       <Provider store={store}>
-        <WorkingDirectoriesProvider>
-          <Header />
-          <Layout />
-        </WorkingDirectoriesProvider>
+        <AppContextProvider>
+          <>
+            <Header />
+            <Layout />
+          </>
+        </AppContextProvider>
       </Provider>
     </React.StrictMode>
   )

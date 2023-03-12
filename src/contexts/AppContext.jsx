@@ -1,11 +1,12 @@
 import React, { useState, createContext } from "react"
 
-export const workingDirectoryContext = createContext({
-  directory: null,
+export const appContext = createContext({
+  rootdir: null,
   assets: null,
+  panorama: null,
 })
 
-const WorkingDirectoriesProvider = ({ children }) => {
+const AppContextProvider = ({ children }) => {
   const [workDirectory, setWorkDirectory] = useState(null)
   const [assetsDirectory, setAssetsDirectory] = useState(null)
   const [panoramaDirectory, setPanoramaDirectory] = useState(null)
@@ -30,6 +31,11 @@ const WorkingDirectoriesProvider = ({ children }) => {
         create: true,
       })
       setPanoramaDirectory(panorama)
+
+      // remove these later on
+      console.log(dirhandle)
+      console.log(assets)
+      console.log(panorama)
     } catch (error) {
       console.log(error)
     }
@@ -40,18 +46,18 @@ const WorkingDirectoriesProvider = ({ children }) => {
       {workDirectory == null ? (
         <input type="button" value="Set working directory" onClick={handleClick} />
       ) : (
-        <workingDirectoryContext.Provider
+        <appContext.Provider
           value={{
-            directory: workDirectory,
+            rootdir: workDirectory,
             assets: assetsDirectory,
             panorama: panoramaDirectory,
           }}
         >
           {children}
-        </workingDirectoryContext.Provider>
+        </appContext.Provider>
       )}
     </div>
   )
 }
 
-export default WorkingDirectoriesProvider
+export default AppContextProvider

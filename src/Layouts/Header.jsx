@@ -4,7 +4,7 @@ import React from "react"
 import FileOperations from "../components/FileOperations"
 import LayoutSelector from "../components/LayoutSelector"
 
-const Header = ({ modes }) => {
+const Header = () => {
   return (
     <nav>
       <FileOperations />

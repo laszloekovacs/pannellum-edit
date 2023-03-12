@@ -6,6 +6,7 @@ import EditLayout from "./EditLayout"
 import PanoramaLayout from "./PanoramaLayout"
 import PreviewLayout from "./PreviewLayout"
 
+/* returns the selected editor "tab" */
 function Layout() {
   const activeLayout = useSelector((state) => state.editor.activeLayout)
 

@@ -1,4 +1,4 @@
-// trim file extension from filename string
+/* trim file extension from filename */
 export function trimFileExtension(filename) {
   return filename.replace(/\.[^/.]+$/, "")
 }
