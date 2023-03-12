@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from "react"
 import { appContext } from "../contexts/AppContext"
 
 /* components */
-import PanoramaItem from "./PanoramaItem"
+import PanoramaListItem from "./PanoramaListItem"
 
 const PanoramaList = () => {
   const projectRoot = useContext(appContext).projectRoot
@@ -55,7 +55,7 @@ const PanoramaList = () => {
     <div>
       <ul>
         {files.map((item) => (
-          <PanoramaItem key={item.name} item={item.name} url={item.url} />
+          <PanoramaListItem key={item.name} item={item.name} url={item.url} />
         ))}
       </ul>
     </div>
