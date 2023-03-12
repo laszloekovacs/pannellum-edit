@@ -28,7 +28,7 @@ export const projectReducer = createSlice({
         // new scene structure
         const scene = {
           title: trimFileExtension(action.payload.title),
-          panorma: action.payload.title,
+          panorama: action.payload.title,
           northOffset: 0,
           hotSpots: [],
         }

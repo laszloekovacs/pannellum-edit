@@ -1,4 +1,5 @@
 import React from "react"
+import SceneList from "../components/SceneList"
 
 const EditLayout = () => {
   return (
@@ -7,7 +8,7 @@ const EditLayout = () => {
         <p>main</p>
       </main>
       <aside>
-        <p>side</p>
+        <SceneList />
       </aside>
     </>
   )
