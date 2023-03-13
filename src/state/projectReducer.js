@@ -37,7 +37,9 @@ export const projectReducer = createSlice({
           hotSpots: [],
         }
 
-        state.scenes[title] = scene
+        return produce(state, (draft) => {
+          draft.scenes[title] = scene
+        })
       }
     },
   },

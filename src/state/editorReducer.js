@@ -16,9 +16,11 @@ export const editorSlice = createSlice({
   reducers: {
     setLayout: (state, action) => {
       state.activeLayout = action.payload
+      return state
     },
     setActiveScene: (state, action) => {
       state.activeScene = action.payload
+      return state
     },
     setViewAngles: (state, action) => {
       const { yaw, pitch } = action.payload
