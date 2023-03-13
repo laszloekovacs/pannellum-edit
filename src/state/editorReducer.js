@@ -6,8 +6,8 @@ const editorInitialState = {
   layouts: layouts,
   activeLayout: layouts[0],
   activeScene: "",
-  viewYaw: 0,
   viewPitch: 0,
+  viewYaw: 0,
 }
 
 export const editorSlice = createSlice({
@@ -23,10 +23,10 @@ export const editorSlice = createSlice({
       return state
     },
     setViewAngles: (state, action) => {
-      const { yaw, pitch } = action.payload
+      const { pitch, yaw } = action.payload
 
-      state.viewYaw = parseFloat(yaw.toFixed(2))
-      state.viewPitch = parseFloat(pitch.toFixed(2))
+      state.viewPitch = Number.parseFloat(pitch).toFixed(6)
+      state.viewYaw = parseFloat(yaw).toFixed(6)
       return state
     },
   },

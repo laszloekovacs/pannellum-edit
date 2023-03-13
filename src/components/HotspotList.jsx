@@ -7,7 +7,11 @@ const HotspotList = () => {
   const scenes = useSelector((state) => state.project.scenes)
   const keys = Object.keys(scenes)
 
+  // no scenes
   if (activeSceneName == null || keys.length == 0) return null
+
+  // no hotspots
+  if (scenes[activeSceneName].hotSpots.length == 0) return null
 
   const activeScene = scenes[activeSceneName]
   const hotSpots = activeScene.hotSpots

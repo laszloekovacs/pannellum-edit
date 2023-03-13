@@ -56,7 +56,7 @@ const PannellumView = () => {
           throw new Error("Failed to generate preview scene")
         }
         //
-        // create a panellum viewer, WARNING: use a MUTABLE COPY of preview.
+        // WARNING: use a MUTABLE COPY of preview.
         // for some reason, pannellum does mutate the scene object
         //
         window.viewer = window.pannellum.viewer("panorama", JSON.parse(JSON.stringify(preview)))
@@ -66,13 +66,14 @@ const PannellumView = () => {
           window.viewer.loadScene(state.editor.activeScene)
 
           // restore rotation after loading
-          window.viewer.setPitch(state.editor.viewPitch, false)
-          window.viewer.setYaw(state.editor.viewYaw, false)
+          //window.viewer.setPitch(state.editor.viewPitch, false)
+          //window.viewer.setYaw(state.editor.viewYaw, false)
 
           // when stopped rotating, save yaw and pitch to the editor state
+          // OBVIOUSLY pannellum gives you NOT the centered yaw and pitch
+          // so we have to query it
           window.viewer.on("animatefinished", (data: { pitch: number; yaw: number }) => {
-            const { yaw, pitch } = data
-            dispatch(setViewAngles({ yaw, pitch }))
+            dispatch(setViewAngles({ pitch: data.yaw, yaw: data.pitch }))
           })
 
           // dump our preview object to the console
