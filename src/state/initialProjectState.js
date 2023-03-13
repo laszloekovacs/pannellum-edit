@@ -10,7 +10,7 @@ const initialProjectState = {
     vfow: 110,
     minPitch: -98,
     maxPitch: 98,
-    basePath: "panorama",
+    basePath: "panoramas",
     imagePath: "images",
     assetsPath: "assets",
   },

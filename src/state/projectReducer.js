@@ -7,6 +7,15 @@ export const projectReducer = createSlice({
   name: "project",
   initialState: initialProjectState,
   reducers: {
+    // add hotspot to current scene
+    addHotSpot: (state, action) => {
+      return produce(state, (draft) => {
+        const { sceneId, hotSpot } = action.payload
+
+        draft.scenes[sceneId].hotSpots.push(hotSpot)
+      })
+    },
+
     // load scene from project file
     loadScene: (state, action) => {
       return action.payload
@@ -47,4 +56,4 @@ export const projectReducer = createSlice({
 
 export default projectReducer.reducer
 
-export const { loadScene, resetProject, setFirstScene, createScene } = projectReducer.actions
+export const { loadScene, resetProject, setFirstScene, createScene, addHotSpot } = projectReducer.actions

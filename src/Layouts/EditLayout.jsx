@@ -3,6 +3,7 @@ import HotspotList from "../components/HotspotList"
 import SceneList from "../components/SceneList"
 import SceneProperties from "../components/SceneProperties"
 import PannellumView from "../components/PannellumView"
+import HotspotAddLink from "../components/HotspotAddLink"
 
 const EditLayout = () => {
   return (
@@ -14,6 +15,7 @@ const EditLayout = () => {
         <SceneList />
         <SceneProperties />
         <HotspotList />
+        <HotspotAddLink />
       </aside>
     </>
   )

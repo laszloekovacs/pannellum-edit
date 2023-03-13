@@ -1,6 +1,7 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { loadScene, resetProject } from "../state/projectReducer"
+import { setActiveScene } from "../state/editorReducer"
 
 const FileOperations = () => {
   const dispatch = useDispatch()
@@ -30,6 +31,10 @@ const FileOperations = () => {
     console.log(JSON.parse(text))
 
     dispatch(loadScene(JSON.parse(text)))
+
+    // on load the activeScene is not set, set it to the first scene
+    dispatch(setActiveScene(JSON.parse(text).default.firstScene))
+
     console.log("scene loaded")
   }
 

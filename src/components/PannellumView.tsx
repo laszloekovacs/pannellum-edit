@@ -22,7 +22,7 @@ const resolveFile = async (img: string, folder: FileSystemDirectoryHandle) => {
 // loop trough the scenes and convert file names to blob urls
 const resolveProject = async (project: IProjectState, rootFolder: FileSystemDirectoryHandle) => {
   try {
-    // create a copy, dont mutate the original
+    // mutate the copy
     const preview = produce(project, async (draft) => {
       // not an array, use weird for...of
       for (let scene of Object.values(draft.scenes)) {
@@ -40,39 +40,50 @@ const resolveProject = async (project: IProjectState, rootFolder: FileSystemDire
   }
 }
 
-/*
-  render the converted scene
-*/
+// note: storing the viewer in a ref did not seem to work
+
 const PannellumView = () => {
   const dispatch = useDispatch()
   const state = useSelector((state: IStore) => state)
   const panoramasFolder = useContext(appContext).panoramas!
-  const view = useRef<viewer>()
 
   useEffect(() => {
     ;(async () => {
       try {
         /* create a preview */
-        const preview = await resolveProject(state.project, panoramasFolder)
+        let preview = await resolveProject(state.project, panoramasFolder)
         if (!preview) {
           throw new Error("Failed to generate preview scene")
         }
-        // create a panellum viewer, use preview as the scene
-        view.current = window.pannellum.viewer("panorama", preview)
+        //
+        // create a panellum viewer, WARNING: use a MUTABLE COPY of preview.
+        // for some reason, pannellum does mutate the scene object
+        //
+        window.viewer = window.pannellum.viewer(
+          "panorama",
+          JSON.parse(JSON.stringify(preview.scenes[state.editor.activeScene]))
+        )
 
-        // change the scene to the editor.activeScene after creation
-        view.current?.loadScene(state.editor.activeScene)
+        if (window.viewer) {
+          // change the scene to the editor.activeScene after creation
+          window.viewer.loadScene(state.editor.activeScene)
 
-        // restore rotation after loading
-        view.current?.setPitch(state.editor.viewPitch, false)
-        view.current?.setYaw(state.editor.viewYaw, false)
+          // restore rotation after loading
+          window.viewer.setPitch(state.editor.viewPitch, false)
+          window.viewer.setYaw(state.editor.viewYaw, false)
 
-        // when stopped rotating, save yaw and pitch to the editor state
-        view.current?.on("animatefinished", (data: { pitch: number; yaw: number }) => {
-          const { yaw, pitch } = data
+          // when stopped rotating, save yaw and pitch to the editor state
+          window.viewer.on("animatefinished", (data: { pitch: number; yaw: number }) => {
+            const { yaw, pitch } = data
+            dispatch(setViewAngles({ yaw, pitch }))
+          })
 
-          dispatch(setViewAngles({ yaw: yaw.toFixed(2), pitch: pitch.toFixed(2) }))
-        })
+          // dump our preview object to the console
+          window.viewer.on("error", (message) => {
+            console.log("preview error: " + message)
+            console.log(preview)
+          })
+        }
       } catch (error) {
         console.error(error)
       }
@@ -80,7 +91,9 @@ const PannellumView = () => {
 
     return () => {
       // destroy the viewer
-      view.current?.destroy()
+      if (window.viewer) {
+        window.viewer.destroy()
+      }
     }
   }, [state.project, state.editor.activeScene])
 
