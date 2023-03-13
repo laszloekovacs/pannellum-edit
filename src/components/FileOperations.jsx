@@ -1,7 +1,7 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { loadScene, resetProject } from "../state/projectReducer"
-import { setActiveScene } from "../state/editorReducer"
+import { resetEditor, setActiveScene } from "../state/editorReducer"
 
 const FileOperations = () => {
   const dispatch = useDispatch()
@@ -70,6 +70,7 @@ const FileOperations = () => {
       name: "reset",
       action: () => {
         dispatch(resetProject())
+        dispatch(resetEditor())
         console.log("scene reset")
       },
     },

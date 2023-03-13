@@ -14,6 +14,10 @@ export const editorSlice = createSlice({
   name: "editor",
   initialState: editorInitialState,
   reducers: {
+    resetEditor: (state) => {
+      return editorInitialState
+    },
+
     setLayout: (state, action) => {
       state.activeLayout = action.payload
       return state
@@ -35,4 +39,4 @@ export const editorSlice = createSlice({
 
 export default editorSlice.reducer
 
-export const { setLayout, setActiveScene, setViewAngles } = editorSlice.actions
+export const { resetEditor, setLayout, setActiveScene, setViewAngles } = editorSlice.actions

@@ -63,11 +63,16 @@ const PannellumView = () => {
 
         if (window.viewer) {
           // change the scene to the editor.activeScene after creation
-          // and set the rotation
-          window.viewer.loadScene(state.editor.activeScene)
+          // make copies
+          const [scene, pitch, yaw] = [state.editor.activeScene, state.editor.viewPitch, state.editor.viewYaw]
+          window.viewer.loadScene(scene)
 
           // when stopped rotating, save yaw and pitch to the editor state
           window.viewer.on("animatefinished", (data: { pitch: number; yaw: number }) => {
+            if (!data || !data.pitch || !data.yaw) {
+              return
+            }
+
             dispatch(setViewAngles({ pitch: data.pitch, yaw: data.yaw }))
           })
 
