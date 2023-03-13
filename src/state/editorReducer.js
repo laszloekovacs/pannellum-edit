@@ -6,6 +6,8 @@ const editorInitialState = {
   layouts: layouts,
   activeLayout: layouts[0],
   activeScene: "",
+  viewYaw: 0,
+  viewPitch: 0,
 }
 
 export const editorSlice = createSlice({
@@ -18,9 +20,16 @@ export const editorSlice = createSlice({
     setActiveScene: (state, action) => {
       state.activeScene = action.payload
     },
+    setViewAngles: (state, action) => {
+      const { yaw, pitch } = action.payload
+
+      state.viewYaw = yaw
+      state.viewPitch = pitch
+      return state
+    },
   },
 })
 
 export default editorSlice.reducer
 
-export const { setLayout, setActiveScene } = editorSlice.actions
+export const { setLayout, setActiveScene, setViewAngles } = editorSlice.actions

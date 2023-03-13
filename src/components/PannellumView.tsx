@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useRef } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { appContext } from "../contexts/AppContext"
 import { IScene, IProjectState, IStore } from "../global"
 import produce from "immer"
+import { setViewAngles } from "../state/editorReducer"
 
 // load the file from folder into an object url
 const resolveFile = async (img: string, folder: FileSystemDirectoryHandle) => {
@@ -43,7 +44,8 @@ const resolveProject = async (project: IProjectState, rootFolder: FileSystemDire
   render the converted scene
 */
 const PannellumView = () => {
-  const project = useSelector((state: IStore) => state.project)
+  const dispatch = useDispatch()
+  const state = useSelector((state: IStore) => state)
   const panoramasFolder = useContext(appContext).panoramas!
   const view = useRef<viewer>()
 
@@ -51,12 +53,26 @@ const PannellumView = () => {
     ;(async () => {
       try {
         /* create a preview */
-        const preview = await resolveProject(project, panoramasFolder)
+        const preview = await resolveProject(state.project, panoramasFolder)
         if (!preview) {
           throw new Error("Failed to generate preview scene")
         }
         // create a panellum viewer, use preview as the scene
         view.current = window.pannellum.viewer("panorama", preview)
+
+        // change the scene to the editor.activeScene after creation
+        view.current?.loadScene(state.editor.activeScene)
+
+        // restore rotation after loading
+        view.current?.setPitch(state.editor.viewPitch, false)
+        view.current?.setYaw(state.editor.viewYaw, false)
+
+        // when stopped rotating, save yaw and pitch to the editor state
+        view.current?.on("animatefinished", (data: { pitch: number; yaw: number }) => {
+          const { yaw, pitch } = data
+
+          dispatch(setViewAngles({ yaw: yaw.toFixed(2), pitch: pitch.toFixed(2) }))
+        })
       } catch (error) {
         console.error(error)
       }
@@ -66,7 +82,7 @@ const PannellumView = () => {
       // destroy the viewer
       view.current?.destroy()
     }
-  }, [project])
+  }, [state.project, state.editor.activeScene])
 
   return <div id="panorama"></div>
 }

@@ -9,6 +9,8 @@ export interface IEditorState {
   layouts: ILayout
   activeLayout: ILayout
   activeScene: string
+  viewPitch: number
+  viewYaw: number
 }
 
 export interface IProjectState {
@@ -66,6 +68,6 @@ declare global {
     // gets the current scene id
     getScene: () => string
     // sets event listener
-    on: (event: "scenechange", callback: (data: any) => void) => viewer
+    on: (event: "scenechange" | "animatefinished", callback: (data: any) => void) => viewer
   }
 }
