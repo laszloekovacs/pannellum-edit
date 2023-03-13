@@ -44,8 +44,8 @@ const resolveProject = async (project: IProjectState, rootFolder: FileSystemDire
 */
 const PannellumView = () => {
   const project = useSelector((state: IStore) => state.project)
-  const divRef = useRef<HTMLDivElement>(null)
   const panoramasFolder = useContext(appContext).panoramas!
+  const view = useRef<viewer>()
 
   useEffect(() => {
     ;(async () => {
@@ -56,7 +56,7 @@ const PannellumView = () => {
           throw new Error("Failed to generate preview scene")
         }
         // create a panellum viewer, use preview as the scene
-        window.viewer = window.pannellum.viewer("panorama", preview)
+        view.current = window.pannellum.viewer("panorama", preview)
       } catch (error) {
         console.error(error)
       }
@@ -64,7 +64,7 @@ const PannellumView = () => {
 
     return () => {
       // destroy the viewer
-      window.viewer.destroy()
+      view.current?.destroy()
     }
   }, [project])
 

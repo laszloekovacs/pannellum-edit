@@ -41,7 +41,7 @@ export interface IScene {
 export interface IHotSpot {
   pitch: number
   yaw: number
-  type: string
+  type: "scene" | "info"
   text: string
   targetYaw: number
   sceneId: string
@@ -53,8 +53,19 @@ declare global {
     pannellum: {
       viewer: (container: HMTLElement | string, initialConfig: Object) => viewer
     }
-    viewer: {
-      destroy: () => void
-    }
+  }
+  interface viewer {
+    destroy: () => void
+    getPitch: () => number
+    getYaw: () => number
+    // set viewer pitch and yaw
+    setPitch: (pitch: number, animated: boolean | number) => viewer
+    setYaw: (yaw: number, animated: boolean | number) => viewer
+    // loads a scene
+    loadScene: (sceneId: string, pitch?: number, yaw?: number) => viewer
+    // gets the current scene id
+    getScene: () => string
+    // sets event listener
+    on: (event: "scenechange", callback: (data: any) => void) => viewer
   }
 }

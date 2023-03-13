@@ -1,6 +1,6 @@
 import React from "react"
 import { useSelector } from "react-redux"
-import Hotspot from "./Hotspot"
+import Hotspot from "./HotspotItem"
 
 const HotspotList = () => {
   const activeSceneName = useSelector((state) => state.editor.activeScene)
