@@ -59,10 +59,7 @@ const PannellumView = () => {
         // create a panellum viewer, WARNING: use a MUTABLE COPY of preview.
         // for some reason, pannellum does mutate the scene object
         //
-        window.viewer = window.pannellum.viewer(
-          "panorama",
-          JSON.parse(JSON.stringify(preview.scenes[state.editor.activeScene]))
-        )
+        window.viewer = window.pannellum.viewer("panorama", JSON.parse(JSON.stringify(preview)))
 
         if (window.viewer) {
           // change the scene to the editor.activeScene after creation
