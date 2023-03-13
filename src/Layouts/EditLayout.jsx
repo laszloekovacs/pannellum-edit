@@ -1,14 +1,14 @@
 import React from "react"
 import HotspotList from "../components/HotspotList"
-import PannellumWrapper from "../components/PannellumWrapper"
 import SceneList from "../components/SceneList"
 import SceneProperties from "../components/SceneProperties"
+import PannellumView from "../components/PannellumView"
 
 const EditLayout = () => {
   return (
     <>
       <main>
-        <PannellumWrapper />
+        <PannellumView />
       </main>
       <aside>
         <SceneList />
