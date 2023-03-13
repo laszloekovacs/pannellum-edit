@@ -63,17 +63,13 @@ const PannellumView = () => {
 
         if (window.viewer) {
           // change the scene to the editor.activeScene after creation
+          // and set the rotation
           window.viewer.loadScene(state.editor.activeScene)
 
-          // restore rotation after loading
-          //window.viewer.setPitch(state.editor.viewPitch, false)
-          //window.viewer.setYaw(state.editor.viewYaw, false)
-
           // when stopped rotating, save yaw and pitch to the editor state
-          // OBVIOUSLY pannellum gives you NOT the centered yaw and pitch
-          // so we have to query it
           window.viewer.on("animatefinished", (data: { pitch: number; yaw: number }) => {
-            dispatch(setViewAngles({ pitch: data.yaw, yaw: data.pitch }))
+            console.log("animatefinished", data)
+            dispatch(setViewAngles({ pitch: data.pitch, yaw: data.yaw }))
           })
 
           // dump our preview object to the console

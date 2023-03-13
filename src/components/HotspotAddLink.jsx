@@ -10,7 +10,7 @@ const HotspotAddLink = () => {
 
   const handleAddLink = (event) => {
     // get the view yaw and pitch, and the current scene id
-    const [yaw, pitch, sceneId] = [editor.viewPitch, editor.viewYaw, editor.activeScene]
+    const [yaw, pitch, sceneId] = [editor.viewYaw, editor.viewPitch, editor.activeScene]
 
     const hotSpot = {
       pitch: pitch,
@@ -19,7 +19,6 @@ const HotspotAddLink = () => {
       text: target,
       sceneId: target,
     }
-    console.log([hotSpot, yaw, pitch, sceneId])
 
     dispatch(addHotSpot({ sceneId, hotSpot }))
   }

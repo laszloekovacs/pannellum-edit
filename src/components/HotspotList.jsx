@@ -11,7 +11,7 @@ const HotspotList = () => {
   if (activeSceneName == null || keys.length == 0) return null
 
   // no hotspots
-  if (scenes[activeSceneName].hotSpots.length == 0) return null
+  if (scenes[activeSceneName]?.hotSpots?.length == 0) return null
 
   const activeScene = scenes[activeSceneName]
   const hotSpots = activeScene.hotSpots

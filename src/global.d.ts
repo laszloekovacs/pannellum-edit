@@ -60,8 +60,8 @@ declare global {
       getPitch: () => number
       getYaw: () => number
       // set viewer pitch and yaw
-      setPitch: (pitch: number, animated: boolean | number) => viewer
-      setYaw: (yaw: number, animated: boolean | number) => viewer
+      setYaw: (yaw: number, animated?: boolean | number) => viewer
+      setPitch: (pitch: number, animated?: boolean | number) => viewer
       // loads a scene
       loadScene: (sceneId: string, pitch?: number, yaw?: number) => viewer
       // gets the current scene id
