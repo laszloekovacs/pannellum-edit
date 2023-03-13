@@ -68,7 +68,6 @@ const PannellumView = () => {
 
           // when stopped rotating, save yaw and pitch to the editor state
           window.viewer.on("animatefinished", (data: { pitch: number; yaw: number }) => {
-            console.log("animatefinished", data)
             dispatch(setViewAngles({ pitch: data.pitch, yaw: data.yaw }))
           })
 

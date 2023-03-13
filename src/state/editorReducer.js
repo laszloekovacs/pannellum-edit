@@ -24,11 +24,9 @@ export const editorSlice = createSlice({
     },
     setViewAngles: (state, action) => {
       const { pitch, yaw } = action.payload
-      console.log("in:" + pitch + " " + yaw)
+
       state.viewPitch = Number.parseFloat(pitch).toFixed(6)
       state.viewYaw = Number.parseFloat(yaw).toFixed(6)
-
-      console.log(state)
 
       return state
     },
