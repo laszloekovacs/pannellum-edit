@@ -1,4 +1,4 @@
-import React, { useState, createContext, SyntheticEvent } from "react"
+import React, { useState, createContext } from "react"
 
 export const appContext = createContext({
   root: null,

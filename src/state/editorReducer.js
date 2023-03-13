@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const layouts = ["editor", "panoramas", "preview"]
 
-const initialState = {
+const editorInitialState = {
   layouts: layouts,
   activeLayout: layouts[0],
   activeScene: "",
@@ -10,7 +10,7 @@ const initialState = {
 
 export const editorSlice = createSlice({
   name: "editor",
-  initialState: initialState,
+  initialState: editorInitialState,
   reducers: {
     setLayout: (state, action) => {
       state.activeLayout = action.payload
