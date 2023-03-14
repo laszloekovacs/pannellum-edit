@@ -23,7 +23,7 @@ const resolveFile = async (img: string, folder: FileSystemDirectoryHandle) => {
 const resolveProject = async (project: IProjectState, rootFolder: FileSystemDirectoryHandle) => {
   try {
     // mutate the copy
-    const preview: IProjectState = produce(project, async (draft: IProjectState) => {
+    const preview = produce(project, async (draft) => {
       // not an array, use weird for...of
       for (let scene of Object.values(draft.scenes)) {
         const img = await resolveFile(scene.panorama, rootFolder)
