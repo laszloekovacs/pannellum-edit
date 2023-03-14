@@ -23,7 +23,7 @@ const resolveFile = async (img: string, folder: FileSystemDirectoryHandle) => {
 const resolveProject = async (project: IProjectState, rootFolder: FileSystemDirectoryHandle) => {
   try {
     // mutate the copy
-    const preview = produce(project, async (draft) => {
+    const preview: IProjectState = produce(project, async (draft: IProjectState) => {
       // not an array, use weird for...of
       for (let scene of Object.values(draft.scenes)) {
         const img = await resolveFile(scene.panorama, rootFolder)
@@ -45,7 +45,7 @@ const resolveProject = async (project: IProjectState, rootFolder: FileSystemDire
 const PannellumView = () => {
   const dispatch = useDispatch()
   const state = useSelector((state: IStore) => state)
-  const panoramasFolder = useContext(appContext).panoramas!
+  const panoramasFolder: FileSystemDirectoryHandle = useContext(appContext).panoramas!
 
   useEffect(() => {
     ;(async () => {
@@ -58,7 +58,7 @@ const PannellumView = () => {
         //
         // WARNING: use a MUTABLE COPY of preview.
         // for some reason, pannellum does mutate the scene object
-        //
+        // and causes weird issues
         window.viewer = window.pannellum.viewer("panorama", JSON.parse(JSON.stringify(preview)))
 
         if (window.viewer) {
