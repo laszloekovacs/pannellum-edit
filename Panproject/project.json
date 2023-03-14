@@ -1,0 +1,39 @@
+{
+  "default": {
+    "firstScene": "01b",
+    "sceneFadeDuration": 1000,
+    "type": "equirectangular",
+    "autoLoad": true,
+    "compass": true,
+    "hotSpotDebug": false,
+    "hfow": 110,
+    "vfow": 110,
+    "minPitch": -98,
+    "maxPitch": 98,
+    "basePath": "panoramas",
+    "imagePath": "images",
+    "assetsPath": "assets"
+  },
+  "scenes": {
+    "01aa": {
+      "title": "01aa.jpg",
+      "panorama": "01aa.jpg",
+      "northOffset": 0,
+      "hotSpots": [
+        {
+          "pitch": 67.7,
+          "yaw": 2.76,
+          "type": "info",
+          "text": "hello"
+        }
+      ]
+    },
+    "01b": {
+      "title": "01b.jpg",
+      "panorama": "01b.jpg",
+      "northOffset": 0,
+      "hotSpots": []
+    }
+  },
+  "articles": []
+}
